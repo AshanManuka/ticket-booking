@@ -11,6 +11,11 @@ let io = socketIO(server);
 
 app.use(express.static(publicPath));
 
+io.on('connection',(socket)=>{
+    console.log("Joined New User.....");
+});
+
+
 server.listen(port, ()=>{
     console.log("Server is Started...")
 })

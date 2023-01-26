@@ -12,13 +12,25 @@
 <br>
 <input type="text" id="orName" placeholder="Organizer Name">
 <br>
+<br>
 <input type="text" id="orMail" placeholder="Organizer E-Mail">
+<br>
 <br>
 <input type="text" id="orContact" placeholder="Organizer Contact">
 <br>
+<br>
 <input type="text" id="orPassword" placeholder="Organizer Password">
+<br>
 <br>
 <button id="addBtn" type="submit">Submit Data</button>
 
+<script src="/socket.io/socket.io.js" ></script>
+<script type="text/javascript">
+    let socket = io();
+
+    socket.on('connect',()=>{
+        alert("U Connected to Server....");
+    })
+</script>
 </body>
 </html>
