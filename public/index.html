@@ -25,12 +25,28 @@
 <button id="addBtn" type="submit">Submit Data</button>
 
 <script src="/socket.io/socket.io.js" ></script>
+<script src="event/js/jQuery/jquery-3.6.1.min.js" ></script>
+
 <script type="text/javascript">
     let socket = io();
 
     socket.on('connect',()=>{
         alert("U Connected to Server....");
-    })
+        sendData();
+    });
+
+    function sendData(){
+        $("#addBtn").on('click',function () {
+            var orName = $("#orName").val();
+            var orMail = $("#orMail").val();
+            var orContact = $("#orContact").val();
+            var orPassword = $("#orPassword").val();
+
+            console.log(orName);
+            console.log(orMail);
+
+        });
+    }
 </script>
 </body>
 </html>
