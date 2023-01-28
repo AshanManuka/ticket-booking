@@ -32,24 +32,26 @@
 
     socket.on('connect',()=>{
         alert("U Connected to Server....");
-        $("#addBtn").on('click',function () {
-            sendData();
-        });
+        // $("#addBtn").on('click',function () {
+        //    // sendData();
+        // });
 
     });
 
-    function sendData(){
+   /* function sendData(){
             var orName = $("#orName").val();
             var orMail = $("#orMail").val();
             var orContact = $("#orContact").val();
             var orPassword = $("#orPassword").val();
 
         socket.emit('sendData',{
-            from : orName,
-            text : orMail
+            orNa : orName,
+            orMa : orMail,
+            orCon : orContact,
+            orPass : orPassword
         });
 
-    }
+    }*/
 
 </script>
 </body>

@@ -18,5 +18,4 @@ const organizerSchema = new mongoose.Schema({
     }
 })
 
-const Organizer = mongoose.model('organizer',organizerSchema);
-module.exports = Organizer;
+module.exports = mongoose.model('organizer',organizerSchema)
