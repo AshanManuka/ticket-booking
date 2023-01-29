@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-//const Organizer = require('../model/organizerModel');
+const cors = require('cors');
 const path = require('path');
 const http = require('http');
 const socketIO = require('socket.io');
@@ -17,6 +17,7 @@ app.use(express.static(publicPath));
 const postRoutes = require('../routes/organizer');
 
 app.use(bodyParser.json);
+app.use(cors());
 app.use(postRoutes);
 
 const uri = 'mongodb+srv://ashan:ashanmanuka@cluster0.s6lxv7d.mongodb.net/Cluster0?retryWrites=true&w=majority';
