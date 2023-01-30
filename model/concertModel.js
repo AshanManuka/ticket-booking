@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const concertSchema = new mongoose.Schema({
-    organizationName : {
+    orgName : {
         type : String,
         required : true
     },
@@ -8,11 +8,11 @@ const concertSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    ticketQty : {
+    ticketPrice : {
         type : String,
         required : true
     },
-    ticketPrice : {
+    ticketQty : {
         type : String,
         required : true
     },

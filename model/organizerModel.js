@@ -8,10 +8,6 @@ const organizerSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    organizerContact : {
-        type : String,
-        required : true
-    },
     organizerPassword : {
         type : String,
         required : true
