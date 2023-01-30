@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const concertSchema = new mongoose.Schema({
     organizationName : {
         type : String,
@@ -25,6 +24,5 @@ const concertSchema = new mongoose.Schema({
         type : String,
         required : true
     }
-})
-
+});
 module.exports = mongoose.model('concert',concertSchema)
