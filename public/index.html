@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GrabTickets.lk</title>
+    <meta name="keywords" content="Book Teckets, Ticket Booking, GrabTickets">
+    <meta name="description" content="This is a web socket project for online ticket booking system for concerts">
+    <meta name="author" content="Sithija Amesh">
+    <meta name="owner" content="Sithija Amesh">
+    <meta name="viewport" content="width=device-width initial-scale=1 user-scalable=no">
+    <link rel="stylesheet" href="/view/normalize.css">
+    <link rel="stylesheet" href="/event/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/view/mainStyles.css">
+    <link rel="stylesheet" href="/view/profileStyles.css">
+    <link rel="stylesheet" href="/view/concertStyles.css">
+    <link rel="stylesheet" href="/view/loginStyles.css">
+    <!-- Font Awesome -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+            rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.css"
+            rel="stylesheet"
+    />
+
+    <style>
+
+        html {
+            overflow-x: hidden;
+        }
+
+        html,
+        body,
+        .intro {
+            height: 100%;
+        }
+
+        @media (min-width: 550px) and (max-width: 750px) {
+            html,
+            body,
+            .intro {
+                height: 750px;
+            }
+        }
+
+        @media (min-width: 800px) and (max-width: 850px) {
+            html,
+            body,
+            .intro {
+                height: 750px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #e04f3b;
+            border-radius: 15px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(246, 24, 33, 0.85);
+        }
+
+        .mask-custom {
+            backdrop-filter: blur(15px);
+            background-color: rgba(255,255,255,.2);
+            border-radius: 3em;
+            border: 2px solid rgba(255,255,255,.1);
+            background-clip: padding-box;
+            box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+        }
+
+        .swapCard:hover {
+            cursor: pointer;
+        }
+
+        #signup-form, #login-form {
+            display: none;
+        }
+
+
+        body>section:nth-child(3) {
+            width: 100vw;
+            height: 100vh;
+            background: url("../event/assets/back-view-crowd-fans-watching-live-performance-music-concert-night-copy-space.jpg");
+        }
+
+        /*concertStyles*/
+        #concertSection {
+            background-color: #0e0345;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #concertSubSection {
+            width: 100vw;
+            height: 50vh;
+            gap: 15px;
+            position: relative;
+            top: 75px;
+            left: 15px;
+            right: 20px;
+            margin-left: 10%;
+        }
+
+        #concertSubSection>div{
+            width: 100%;
+            height: 100%;
+        }
+
+        #concertSubSection>div>div:nth-child(1)>img {
+            width: 100%;
+            height: 200px
+        }
+
+        .concertSec {
+            background: url("../event/assets/back-view-crowd-fans-watching-live-performance-music-concert-night-copy-space.jpg");
+        }
+
+        #concertSection>section:nth-child(2)>div>div:nth-child(1)>img {
+            width: 100%;
+            height: 100%;
+        }
+        /*concertStyles*/
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand text-danger text-lg-start" href="#">GrabTickets.lk</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active text-light" aria-current="page" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-light" href="../view/concerts.html">Concerts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active text-light">News</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <a href="../view/loginPage.html"><button class="btn btn-success" type="submit"> Login </button></a>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <section id="loginSection" class="intro">
+        <div class="bg-image h-100" style="background-image: url(../event/assets/bg.jpg)">
+            <div class="mask d-flex align-items-center h-100">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-10 col-lg-7 col-xl-6">
+                            <div class="card mask-custom">
+
+                                <!--card-->
+                                <div class="card-body p-5 pb-4 text-white">
+
+                                    <div class="my-4">
+
+                                        <h2 id="title" class="text-center mb-1">User Login Form</h2>
+                                        <p class="text-center mb-5" style="color: #e8e8e8">GrabTickets.lk</p>
+
+                                        <!--login form-->
+                                        <form id="login-form" class="w-100">
+
+                                            <!-- username/admin name input -->
+                                            <div class="form-outline form-white mb-4">
+                                                <input type="text" id="userName" class="form-control form-control-lg" />
+                                                <label id="nameOnLoginForm" class="form-label" for="userName">User Name</label>
+                                            </div>
+
+                                            <!-- Password input -->
+                                            <div class="form-outline form-white mb-4">
+                                                <input type="password" id="pw" class="form-control form-control-lg" />
+                                                <label class="form-label" for="pw">Password</label>
+                                            </div>
+
+                                            <!-- Submit button -->
+                                            <button id="btnLogin" type="button" class="btn btn-light btn-block mb-4">Login</button>
+
+                                            <p class="swapCard text-center text-light">Don't have an account? Signup Now</p>
+
+                                            <!-- Register buttons -->
+                                            <div class="text-center">
+                                                <p>or Login with:</p>
+                                                <button type="button" class="btn btn-light btn-floating mx-1">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-light btn-floating mx-1">
+                                                    <i class="fab fa-google"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-light btn-floating mx-1">
+                                                    <i class="fab fa-twitter"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-light btn-floating mx-1">
+                                                    <i class="fab fa-github"></i>
+                                                </button>
+                                            </div>
+
+                                            <!-- login as admin button -->
+                                            <button id="btnLogAsAdmin" type="button" class="btn btn-block mt-3 text-light">Log as Admin</button>
+
+                                        </form>
+                                        <!--login form-->
+
+                                        <!--signup form-->
+                                        <form id="signup-form" class="w-100">
+                                            <!-- organization input -->
+                                            <div class="form-outline form-white mb-4">
+                                                <input type="text" id="form3Example2" class="form-control form-control-lg" />
+                                                <label id="nameOnSignupForm" class="form-label" for="form3Example2">Organization or User Name</label>
+                                            </div>
+
+                                            <!-- Email input -->
+                                            <div class="form-outline form-white mb-4">
+                                                <input type="email" id="form3Example3" class="form-control form-control-lg" />
+                                                <label class="form-label" for="form3Example3">Email address</label>
+                                            </div>
+
+                                            <!-- Password input -->
+                                            <div class="form-outline form-white mb-4">
+                                                <input type="password" id="form3Example4" class="form-control form-control-lg" />
+                                                <label class="form-label" for="form3Example4">Password</label>
+                                            </div>
+
+                                            <!-- Checkbox -->
+                                            <div class="form-check d-flex justify-content-center mb-1">
+                                                <input
+                                                        class="form-check-input me-2"
+                                                        type="checkbox"
+                                                        value=""
+                                                        id="form2Example3"
+                                                        checked
+                                                />
+                                                <label class="form-check-label" for="form2Example3">
+                                                    I agree terms and conditions
+                                                </label>
+                                            </div>
+
+                                            <div class="form-check d-flex justify-content-center mb-4">
+                                                <input class="form-check-input me-2"
+                                                       type="checkbox"
+                                                       value=""
+                                                       id="isAdmin"
+                                                />
+                                                <label class="form-check-label" for="isAdmin">I am an Admin</label>
+                                            </div>
+
+
+
+                                            <!-- Submit button -->
+                                            <button id="btnSignup" type="button" class="btn btn-light btn-block mb-4">Sign up</button>
+
+                                            <p class="swapCard text-center text-light">Also have an account? Login Now</p>
+
+                                            <!-- Register buttons -->
+                                            <div class="text-center">
+                                                <p>or sign up with:</p>
+                                                <button type="button" class="btn btn-light btn-floating mx-1">
+                                                    <i class="fab fa-facebook-f"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-light btn-floating mx-1">
+                                                    <i class="fab fa-google"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-light btn-floating mx-1">
+                                                    <i class="fab fa-twitter"></i>
+                                                </button>
+
+                                                <button type="button" class="btn btn-light btn-floating mx-1">
+                                                    <i class="fab fa-github"></i>
+                                                </button>
+                                            </div>
+
+                                        </form>
+                                        <!--signup form-->
+
+                                    </div>
+
+                                </div>
+                                <!--card-->
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="organizationProfileSection">
+        <div class="container" style="">
+            <form  style="background-color: rgba(151,132,132,0.52);">
+                <div class="row g-3 ps-3 pe-3 text-light" style="top: 50px">
+                    <div class="col-md-6">
+                        <label for="inputOrganizationName" class="form-label fw-bold text-dark ">Organization Name :</label>
+                        <input type="text" class="form-control" id="inputOrganizationName">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputConcertName" class="form-label fw-bold text-dark ">Concert Name :</label>
+                        <input type="text" class="form-control" id="inputConcertName">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputPrice" class="form-label  fw-bold text-dark ">Ticket Price :</label>
+                        <input type="text" class="form-control" id="inputPrice" placeholder="Rs.">
+                    </div>
+                    <div class="col-12">
+                        <label for="inputQty" class="form-label   fw-bold text-dark">Quantity :</label>
+                        <input type="text" class="form-control" id="inputQty" placeholder="00">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputDate" class="form-label  fw-bold text-dark">Date & Time:</label>
+                        <input type="datetime-local" class="form-control" id="inputDate">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Place" class="form-label  fw-bold text-dark">Place :</label>
+                        <input type="text" class="form-control" id="Place">
+
+                    </div>
+                    <!--            <div class="mb-3">-->
+                    <!--                <label for="formFile" class="form-label  fw-bold text-dark">Post of Advertsment</label>-->
+                    <!--                <input class="form-control" type="file" id="formFile">-->
+                    <!--            </div>-->
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                Check me out
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-12 pb-3" >
+                    <button id="clear" type="submit" class="btn btn-danger fw-bold shadow-lg" style="margin-left: 35%; box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.76);">Clear All</button>
+                    <button id="publish" type="submit" class="btn btn-success fw-bold shadow-lg" style="margin-left: 10%; box-shadow: 1px 2px 3px 1px rgba(0, 0, 0, 0.76);" >Publish</button>
+                </div>
+            </form></div>
+
+    </section>
+
+<section id="concertSection">
+    <section id="concertSubSection">
+
+        <div class="card mb-3 bg-danger" style="max-width: 1000px;">
+            <h3 class="card-title text-black ms-lg-5 fw-bolder">ADARE Live in Concert</h3>
+            <div class="row g-2">
+                <div class="col-md-12">
+                    <div class="card-body">
+
+                        <ul class="list-group list-group-flush bg-dark text-light">
+                            <div class="row">
+                                <label class="list-group-item bg-dark text-light col-8 ms-3">Date  : </label>
+                                <label class="list-group-item bg-dark text-light col">dd.mm.yy</label>
+
+                                <label class="list-group-item bg-dark text-light col-8 ms-3">Price  : </label>
+                                <label class="list-group-item bg-dark text-light col">0.00</label>
+
+                                <label class="list-group-item bg-dark text-light col-8 ms-3">Available Tickets  : </label>
+                                <label class="list-group-item bg-dark text-light col">00</label>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <a><button id="btnBuy" style="margin-left: 30%" class="btn btn-primary col-5" data-bs-target="#buy1" data-bs-toggle="modal" type="button">$ BUY $</button></a>
+            </div>
+        </div>
+    </section>
+
+    <div aria-hidden="true" aria-labelledby="buy1" class="modal fade" id="buy1" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title text-light">Enter Details to Grab Your Ticktes</h5>
+                    <button aria-label="Close" class="btn-close bg-danger" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body bg-dark">
+                    <section>
+                        <div class="mb-3">
+                            <label class="form-label text-light fw-bolder" for="txtCustomerMail">E-Mail Address : </label>
+                            <input class="form-control bg-dark text-light" id="txtCustomerMail" type="text">
+                        </div>
+                        <div class="mb-3 shadow-none">
+                            <label class="form-label text-light fw-bolder" for="txtCustomerContact">Contact Number : </label>
+                            <input class="form-control bg-dark text-light" id="txtCustomerContact" multiple type="text">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-light fw-bolder" for="txtQty">How Many Tickets Do You Want ?</label>
+                            <input class="form-control form-control-sm bg-dark text-light" id="txtQty" type="number">
+                        </div>
+
+                        <label class="text-light fw-bolder">Total Price :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="text-light fw-bolder" id="lblTotalPrice">0.00</label>
+
+                    </section>
+
+
+
+                </div>
+                <div class="modal-footer bg-dark">
+                    <button class="btn btn-danger" data-bs-dismiss="modal" type="button" id="btnCansel">Cancel</button>
+                    <button class="btn btn-success" id="btnSaveCustomer" type="button"  id="btnPurches">$$ BUY $$</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- MDB -->
+
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+<script
+        type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.1/mdb.min.js"
+></script>
+<script src="../event/assets/js/bootstrap.min.js"></script>
+<script src="event/assets/controllers/main.js" type="text/javascript"></script>
+<script>
+    var admin;
+
+    document.getElementById("organizationProfileSection").style.display='none';
+    document.getElementById("concertSection").style.display='none';
+
+    let signupForm = $('#signup-form');
+    let loginForm = $('#login-form');
+
+    let state = "user";
+
+    let title = $("#title");
+
+    $(document).ready(function (){
+        loginForm.css('display','inline-block');
+    });
+
+    $("#btnLogin").click(function (){
+        if (admin === 1){
+            document.getElementById("loginSection").style.display='none';
+            document.getElementById("organizationProfileSection").style.display='block';
+        }else {
+            document.getElementById("loginSection").style.display='none';
+            document.getElementById("concertSection").style.display='block';
+        }
+    });
+
+    $("#btnSignup").click(function (){
+        if ($("#isAdmin").prop('checked') === true){
+            // admin
+        }else {
+            // user
+        }
+    });
+
+    $('.swapCard').click(function () {
+        let signupDisplay =  signupForm. css("display");
+
+        if (signupDisplay === "none"){
+            signupForm.css('display','inline-block');
+            loginForm.css('display','none');
+            title.text("Signup Form");
+
+        }else {
+            loginForm.css('display','inline-block');
+            signupForm.css('display','none');
+            if (state === "user"){
+                title.text("User Login Form");
+            }else {
+                title.text("Admin Login Form");
+            }
+        }
+    });
+
+    $('#btnLogAsAdmin').click(function (){
+
+        admin = 1;
+
+        if (state === "user"){
+            title.text("Admin Login Form");
+            $('#btnLogAsAdmin').text("Log As User");
+            $("#nameOnLoginForm").text("Admin Name");
+            state = "admin";
+
+        }else {
+            title.text("User Login Form");
+            $('#btnLogAsAdmin').text("Log As Admin");
+            $("#nameOnLoginForm").text("User Name");
+            state = "user";
+        }
+    });
+    startFunction();
+
+</script>
+
+
+</body>
+</html>
