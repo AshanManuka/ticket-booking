@@ -617,6 +617,8 @@
                     if (uElement.userMail === uName && uElement.userPassword === pWord){
                         document.getElementById("loginSection").style.display='none';
                         document.getElementById("concertSection").style.display='block';
+                        document.getElementById("concertSubSection").style.display='none';
+                        buildPost();
                     }
                 }
             })
@@ -656,6 +658,37 @@
                 .catch((error) => console.log(error))
 
     }
+
+    $("#btnBuy").on('click',function(){
+       buildPost();
+    });
+
+
+    function buildPost(){
+
+        var concertList =[];
+
+        axios.get("http://localhost:8000/concerts/allconcert")
+            .then((res)=> {
+                concertList = res.data;
+                for (const uElement of concertList) {
+                    if (null != uElement.concertName){
+                        var conName = uElement.concertName;
+                        var conDate = uElement.concertDate;
+                        var conPrice = uElement.ticketPrice;
+                        var conQty = uElement.ticketQty;
+
+                        var e = $(`<div style="display:block; background-color: #0dcaf0; float:left;width:`+500+`px; height:`+520+`px; margin-top:`+100+`px;margin-left:`+100+`px;border:1px dashed #CCCCCC;"><h1 style="margin-left: 120px">${conName}</h1><h1 style="color: #04414d; margin-left: 20px;">Date :</h1><h2 style="margin-left: 120px">${conDate}</h2><br><h1 style="color: #04414d; margin-left: 20px;">Ticket Price :</h1><h2 style="margin-left: 120px">${conPrice}</h2><br><h1 style="color: #04414d; margin-left: 20px;">Ticket Price :</h1<h2 style="margin-left: 120px">${conQty}</h2><br><br> <button style="background-color: #a52834; border-radius: 40px; width: 200px; height: 60px; margin-left: 150px; margin-bottom: 20px;">Buy Ticket</button></div>`);
+                        e.attr('id', 'myid');
+                        $('#concertSection').append(e);
+                    }
+                }
+            })
+            .catch((err) => console.log(err))
+
+
+    }
+
 
 
 
