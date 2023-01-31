@@ -591,14 +591,22 @@
 
     function adminLogin(uName,pWord){
        //call methods
-
-        document.getElementById("loginSection").style.display='none';
-        document.getElementById("organizationProfileSection").style.display='block';
+        axios.get("http://localhost:8000/organizer/specsorganizer")
+            .then((res)=> {
+                orgList = res.data;
+                console.log("org list : ",orgList)
+                for (const uElement of orgList) {
+                    if (uElement.organizerMail === uName && uElement.organizerPassword === pWord){
+                        document.getElementById("loginSection").style.display='none';
+                        document.getElementById("organizationProfileSection").style.display='block';
+                    }
+                }
+            })
+            .catch((err)=> console.log(err));
     }
 
     function userLogin(uName,pWord){
         //call methods
-        var users = {};
         var userList =[];
 
         axios.get("http://localhost:8000/user/specsuser")
@@ -606,17 +614,14 @@
                 userList = res.data;
                 console.log("user list : ",userList)
                 for (const uElement of userList) {
-                    if (uElement.userName === uName && uElement.userPassword === pWord){
-                        alert("you can access");
+                    if (uElement.userMail === uName && uElement.userPassword === pWord){
+                        document.getElementById("loginSection").style.display='none';
+                        document.getElementById("concertSection").style.display='block';
                     }
                 }
             })
             .catch((err) => console.log(err))
 
-
-
-        document.getElementById("loginSection").style.display='none';
-        document.getElementById("concertSection").style.display='block';
 
     }
 

@@ -68,5 +68,12 @@ router.put('organizer/update:id',(req,res)=>{
 // })
 
 
+router.get('/specsorganizer',async (req,res)=>{
+    const expenses = await organizer.find();
+    res.send(expenses);
+
+})
+
+
 
 module.exports = router;
