@@ -15,6 +15,25 @@ router.get("/allusers", async (req, res) => {
 router.post('/saveuser',async(req,res)=>{
     const data=await User.create(req.body);
     res.send(data)
+});
+
+// router.get('/specsuser',async (req,res)=>{
+//     try {
+//         let param = req.body;
+//         console.log(param);
+//         const post = await User.findOne({ UserName:req.params.id});
+//         res.send(post);
+//     } catch {
+//         res.status(404);
+//         res.send({ error: "User doesn't exist!" });
+//     }
+//
+// })
+
+router.get('/specsuser',async (req,res)=>{
+    const expenses = await User.find();
+    res.send(expenses);
+
 })
 
 

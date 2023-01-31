@@ -28,12 +28,13 @@ router.post('/save',async(req,res)=>{
 //get organizers
 router.get("/organizers", async (req, res) => {
 
-    let productCount = await organizer.countDocuments();
-
-    if(!productCount){
-        res.send(500).json({success:false})
+    try {
+        const expenses = await organizer.find();
+        res.send(expenses);
+    } catch (error) {
+        // return res.status(500).json({ msg: "Sorry, something went wrong" });
+        return error
     }
-    res.send({productCount: productCount})
 });
 
  //update

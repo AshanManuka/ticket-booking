@@ -471,9 +471,9 @@
         var pWord = $("#pw").val();
 
         if (admin){
-            adminLogin(uName,pw);
+            adminLogin(uName,pWord);
         }else {
-            userLogin(uName,pw);
+            userLogin(uName,pWord);
         }
     });
 
@@ -598,9 +598,26 @@
 
     function userLogin(uName,pWord){
         //call methods
+        var users = {};
+        var userList =[];
+
+        axios.get("http://localhost:8000/user/specsuser")
+            .then((res)=> {
+                userList = res.data;
+                console.log("user list : ",userList)
+                for (const uElement of userList) {
+                    if (uElement.userName === uName && uElement.userPassword === pWord){
+                        alert("you can access");
+                    }
+                }
+            })
+            .catch((err) => console.log(err))
+
+
 
         document.getElementById("loginSection").style.display='none';
         document.getElementById("concertSection").style.display='block';
+
     }
 
     function makePost(orName,cName,tPrice,tQty,cDate,cPlace){
