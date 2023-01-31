@@ -1,0 +1,80 @@
+/*!*#concertSection {*!*/
+/*!*    background-color: #0e0345;*!*/
+/*!*    overflow-x: hidden;*!*/
+/*!*}*!*/
+
+
+/*#concertSubSection {*/
+/*    display: flex;*/
+/*    width: 100vw;*/
+/*    height: 40vh;*/
+/*    gap: 15px;*/
+/*    position: absolute;*/
+/*    top: 75px;*/
+/*    left: 15px;*/
+/*    right: 20px;*/
+/*    margin-left: 15px;*/
+/*}*/
+
+/*#concertSubSection>div{*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
+
+/*#concertSubSection {*/
+/*    display: flex;*/
+/*    width: 100vw;*/
+/*    height: 40vh;*/
+/*    margin-left: 15px;*/
+/*    gap: 15px;*/
+/*    position: absolute;*/
+/*    top: 600px;*/
+/*    left: 15px;*/
+/*    right: 20px;*/
+/*}*/
+
+/*#concertSubSectionv{*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
+
+/*#concertSubSection>div>div:nth-child(1)>img {*/
+/*    width: 100%;*/
+/*    height: 200px*/
+/*}*/
+
+/*.concertSec {*/
+/*    background: url("../event/assets/back-view-crowd-fans-watching-live-performance-music-concert-night-copy-space.jpg");*/
+/*}*/
+
+/*#concertSection>section:nth-child(2)>div>div:nth-child(1)>img {*/
+/*    width: 100%;*/
+/*    height: 200px;*/
+/*}*/
+
+/*html {*/
+/*    scroll-behavior: smooth;*/
+/*}*/
+
+/*::-webkit-scrollbar {*/
+/*    width: 10px;*/
+/*}*/
+
+/*::-webkit-scrollbar-track {*/
+/*    background: #000000;*/
+/*}*/
+
+/*::-webkit-scrollbar-thumb {*/
+/*    background: #e04f3b;*/
+/*    border-radius: 15px;*/
+/*}*/
+
+/*::-webkit-scrollbar-thumb:hover {*/
+/*    background: rgba(246, 24, 33, 0.85);*/
+/*}*/
+
+/*#concertSection {*/
+/*    background-color: #0e0345;*/
+/*    width: 100vw;*/
+/*    height: 100vh;*/
+/*}*/

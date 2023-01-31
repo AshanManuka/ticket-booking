@@ -8,12 +8,13 @@
     <meta name="author" content="Sithija Amesh">
     <meta name="owner" content="Sithija Amesh">
     <meta name="viewport" content="width=device-width initial-scale=1 user-scalable=no">
-    <link rel="stylesheet" href="/view/normalize.css">
-    <link rel="stylesheet" href="/event/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/view/mainStyles.css">
-    <link rel="stylesheet" href="/view/profileStyles.css">
-    <link rel="stylesheet" href="/view/concertStyles.css">
-    <link rel="stylesheet" href="/view/loginStyles.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="../view/normalize.css">
+    <link rel="stylesheet" href="../event/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../view/mainStyles.css">
+    <link rel="stylesheet" href="../view/profileStyles.css">
+    <link rel="stylesheet" href="../view/concertStyles.css">
+    <link rel="stylesheet" href="../view/loginStyles.css">
     <!-- Font Awesome -->
     <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -447,8 +448,11 @@
 ></script>
 <script src="../event/assets/js/bootstrap.min.js"></script>
 <script src="event/assets/controllers/main.js" type="text/javascript"></script>
+<!--<script src="./node_modules/axios/dist/axios.min.js"></script>-->
 <script src="/socket.io/socket.io.js"></script>
 <script>
+
+   // const {default : axios} = require("axios");
 
     var admin;
 
@@ -478,9 +482,9 @@
 
     $("#btnSignup").click(function (){
         if ($("#isAdmin").prop('checked') === true){
-            // admin
+            makeAdminSignUp();
         }else {
-            // user
+            makeUserSignUp();
         }
     });
 
@@ -529,6 +533,31 @@
     socket.on('disconnect', ()=>{
         console.log("connect to the server in page")
     });
+
+    // making logic to communicate with backend
+    function  makeAdminSignUp(){
+
+        $("#btnSignup").on('click',function(){
+           var name = $("#form3Example2").val();
+           var mail = $("#form3Example3").val();
+           var password = $("#form3Example4").val();
+
+
+        });
+    }
+
+    function  makeUserSignUp(){
+
+        axios.get("http://localhost:8000/user/allusers")
+            .then((res)=> console.log(res))
+            .catch((err) => console.log(err))
+
+        alert("data saved");
+    }
+
+
+
+
 
 </script>
 
