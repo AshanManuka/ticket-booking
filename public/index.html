@@ -104,7 +104,7 @@
         #concertSection {
             background-color: #0e0345;
             width: 100vw;
-            height: 100vh;
+            height: 500%;
         }
 
         #concertSubSection {
@@ -141,7 +141,6 @@
 
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand text-danger text-lg-start" href="#">GrabTickets.lk</a>
@@ -420,9 +419,6 @@
                             <input class="form-control form-control-sm bg-dark text-light" id="txtQty" type="number">
                         </div>
 
-                        <label class="text-light fw-bolder">Total Price :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <label class="text-light fw-bolder" id="lblTotalPrice">0.00</label>
-
                     </section>
 
 
@@ -644,25 +640,6 @@
     }
 
 
-    function buyTicket(cosMail,conNumber,tCount,tAmount){
-            axios.post("http://localhost:8000/invoices/saveinvoice", {
-                mailAddress : cosMail,
-                contactNumber : conNumber,
-                ticketCount : tCount,
-                amount : tAmount
-            })
-                .then((response)=> {
-                    console.log(response)
-                    alert("You Bought the tickets...!");
-                })
-                .catch((error) => console.log(error))
-
-    }
-
-    $("#btnBuy").on('click',function(){
-       buildPost();
-    });
-
 
     function buildPost(){
 
@@ -678,7 +655,7 @@
                         var conPrice = uElement.ticketPrice;
                         var conQty = uElement.ticketQty;
 
-                        var e = $(`<div style="display:block; background-color: #0dcaf0; float:left;width:`+500+`px; height:`+520+`px; margin-top:`+100+`px;margin-left:`+100+`px;border:1px dashed #CCCCCC;"><h1 style="margin-left: 120px">${conName}</h1><h1 style="color: #04414d; margin-left: 20px;">Date :</h1><h2 style="margin-left: 120px">${conDate}</h2><br><h1 style="color: #04414d; margin-left: 20px;">Ticket Price :</h1><h2 style="margin-left: 120px">${conPrice}</h2><br><h1 style="color: #04414d; margin-left: 20px;">Ticket Price :</h1<h2 style="margin-left: 120px">${conQty}</h2><br><br> <button style="background-color: #a52834; border-radius: 40px; width: 200px; height: 60px; margin-left: 150px; margin-bottom: 20px;">Buy Ticket</button></div>`);
+                        var e = $(`<div style="display:block; background-color: #0a5766; border-radius:20px; float:left;width:`+500+`px; height:`+520+`px; margin-top:`+100+`px;margin-left:`+100+`px;border:1px dashed #CCCCCC;"><div style="border-radius:20px;  background-color: #2c3034" ><h1 style="margin-left: 120px; color: azure" >${conName}</h1></div><br><br><h1 style="color: azure; margin-left: 20px;">Date :${conDate}</h1><br><h1 style="color: azure; margin-left: 20px;">Ticket Price :${conPrice}</h1><br><h1 style="color: azure; margin-left: 20px;">Ticket Price :${conQty}</h1><br><br> <button style="background-color: #a52834; border-radius: 40px; width: 200px; height: 60px; margin-left: 150px; margin-bottom: 20px;" class="buyTicket" id="btnn" data-bs-target="#buy1" data-bs-toggle="modal"  type="button">Buy Ticket</button></div>`);
                         e.attr('id', 'myid');
                         $('#concertSection').append(e);
                     }
@@ -689,6 +666,21 @@
 
     }
 
+
+    function buyTicket(cosMail,conNumber,tCount,tAmount){
+        axios.post("http://localhost:8000/invoices/saveinvoice", {
+            mailAddress : cosMail,
+            contactNumber : conNumber,
+            ticketCount : tCount,
+            amount : tAmount
+        })
+            .then((response)=> {
+                console.log(response)
+                alert("You Bought the tickets...!");
+            })
+            .catch((error) => console.log(error))
+
+    }
 
 
 
