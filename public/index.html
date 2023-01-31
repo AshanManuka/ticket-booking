@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />    <link rel="stylesheet" href="view/mainStyles.css">
 
     <!-- Font Awesome -->
-
-
     <link
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
             rel="stylesheet"
@@ -451,9 +449,10 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
 
-   // const {default : axios} = require("axios");
-
-    var admin;
+    var admin = false;
+    $("#btnLogAsAdmin").on('click',function () {
+        admin = true;
+    })
 
     document.getElementById("organizationProfileSection").style.display='none';
     document.getElementById("concertSection").style.display='none';
@@ -468,29 +467,27 @@
     });
 
     $("#btnLogin").click(function (){
-        if (admin === 1){
-            document.getElementById("loginSection").style.display='none';
-            document.getElementById("organizationProfileSection").style.display='block';
+        var uName = $("#userName").val();
+        var pWord = $("#pw").val();
+
+        if (admin){
+            adminLogin(uName,pw);
         }else {
-            document.getElementById("loginSection").style.display='none';
-            document.getElementById("concertSection").style.display='block';
+            adminLogin(uName,pw);
         }
     });
 
 //grab data
-   var name;
-   var mail;
-   var password;
 
     $("#btnSignup").click(function (){
-        name = $("#form3Example2").val();
-        mail = $("#form3Example3").val();
-        password = $("#form3Example4").val();
+       var name = $("#form3Example2").val();
+       var mail = $("#form3Example3").val();
+       var password = $("#form3Example4").val();
 
         if ($("#isAdmin").prop('checked') === true){
-            makeAdminSignUp();
+            makeAdminSignUp(name,mail,password);
         }else {
-            makeUserSignUp();
+            makeUserSignUp(name,mail,password);
         }
     });
 
@@ -513,23 +510,19 @@
         }
     });
 
-    $('#btnLogAsAdmin').click(function (){
+    $("#publish").on('click', function(){
+       var orName =  $("#inputOrganizationName").val();
+       var cName =  $("#inputConcertName").val();
+       var tPrice =  $("#inputPrice").val();
+       var tQty =  $("#inputQty").val();
+       var cDate =  $("#inputDate").val();
+       var cPlace =  $("#Place").val();
 
-        admin = 1;
-
-        if (state === "user"){
-            title.text("Admin Login Form");
-            $('#btnLogAsAdmin').text("Log As User");
-            $("#nameOnLoginForm").text("Admin Name");
-            state = "admin";
-
-        }else {
-            title.text("User Login Form");
-            $('#btnLogAsAdmin').text("Log As Admin");
-            $("#nameOnLoginForm").text("User Name");
-            state = "user";
-        }
+       makePost(orName,cName,tPrice,tQty,cDate,cPlace);
     });
+
+
+
     let socket = io();
 
     socket.on('connect', ()=>{
@@ -542,18 +535,11 @@
 
 
 
-    // making logic to communicate with backend
-
-  /* $("#btnSignup").on('click',function(){
-        name = $("#form3Example2").val();
-        mail = $("#form3Example3").val();
-        password = $("#form3Example4").val();
+//=====================================================================================================================
 
 
-   });*/
-
-
-   function  makeAdminSignUp(){
+    // backend calling
+   function  makeAdminSignUp(name,mail,password){
        axios.get("http://localhost:8000/organizer/organizers")
            .then((res)=> console.log(res))
            .catch((err) => console.log(err))
@@ -563,12 +549,15 @@
            organizerMail : mail,
            organizerPassword : password
        })
-           .then((response)=> console.log(response))
+           .then((response)=> {
+               console.log(response)
+               alert("Saved Organizer...!");
+           })
            .catch((error) => console.log(error))
 
     }
 
-    function  makeUserSignUp(){
+    function  makeUserSignUp(name,mail,password){
 
         axios.get("http://localhost:8000/user/allusers")
             .then((res)=> console.log(res))
@@ -582,10 +571,41 @@
             userMail : mail,
             userPassword : password
         })
-            .then((response)=> console.log(response))
+            .then((response)=> {
+                console.log(response)
+                alert("saved User...!");
+            })
             .catch((error) => console.log(error))
+    }
 
+    function adminLogin(uName,pWord){
+       //call methods
 
+        document.getElementById("loginSection").style.display='none';
+        document.getElementById("organizationProfileSection").style.display='block';
+    }
+
+    function userLogin(uName,pWord){
+        //call methods
+
+        document.getElementById("loginSection").style.display='none';
+        document.getElementById("concertSection").style.display='block';
+    }
+
+    function makePost(orName,cName,tPrice,tQty,cDate,cPlace){
+        axios.post("http://localhost:8000/concerts/saveconcert", {
+            orgName : orName,
+            concertName : cName,
+            ticketPrice : tPrice,
+            ticketQty : tQty,
+            concertDate : cDate,
+            concertPlace : cPlace
+        })
+            .then((response)=> {
+                console.log(response)
+                alert("saved concert...!");
+            })
+            .catch((error) => console.log(error))
     }
 
 
@@ -593,7 +613,6 @@
 
 
 </script>
-<!--<script src="event/assets/controllers/main.js" type="text/javascript"></script>-->
 
 
 </body>
