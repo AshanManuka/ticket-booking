@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }))
 const organizer = require('./routes/organizer');
 const users = require('./routes/user-router');
 const concerts = require('./routes/concert-router');
+const invoice = require('./routes/invoice-router');
 
 
 
@@ -20,6 +21,7 @@ const concerts = require('./routes/concert-router');
 app.use('/organizer',organizer)
 app.use('/user', users)
 app.use('/concerts', concerts)
+app.use('/invoices', invoice)
 
 
 module.exports = app;

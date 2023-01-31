@@ -473,7 +473,7 @@
         if (admin){
             adminLogin(uName,pw);
         }else {
-            adminLogin(uName,pw);
+            userLogin(uName,pw);
         }
     });
 
@@ -520,6 +520,17 @@
 
        makePost(orName,cName,tPrice,tQty,cDate,cPlace);
     });
+
+
+    $("#btnSaveCustomer").on('click', function(){
+       var cosMail = $("#txtCustomerMail").val();
+       var conNumber = $("#txtCustomerContact").val();
+       var tCount = $("#txtQty").val();
+       var tAmount = "4500";
+
+       buyTicket(cosMail,conNumber,tCount,tAmount);
+    });
+
 
 
 
@@ -606,6 +617,22 @@
                 alert("saved concert...!");
             })
             .catch((error) => console.log(error))
+    }
+
+
+    function buyTicket(cosMail,conNumber,tCount,tAmount){
+            axios.post("http://localhost:8000/invoices/saveinvoice", {
+                mailAddress : cosMail,
+                contactNumber : conNumber,
+                ticketCount : tCount,
+                amount : tAmount
+            })
+                .then((response)=> {
+                    console.log(response)
+                    alert("You Bought the tickets...!");
+                })
+                .catch((error) => console.log(error))
+
     }
 
 
